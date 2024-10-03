@@ -1,0 +1,6 @@
+@aquaFin.API_HostAddress = http://localhost:5198
+
+GET {{aquaFin.API_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
