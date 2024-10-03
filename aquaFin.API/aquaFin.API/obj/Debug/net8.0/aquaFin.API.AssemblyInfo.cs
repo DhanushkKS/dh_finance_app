@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("aquaFin.API")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+f7be4901d6cb2ac40e6fafdc5db83ae86820a9bc")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+a0f6d8d65c1729d015dceeb9705d9f83e4e01769")]
 [assembly: System.Reflection.AssemblyProductAttribute("aquaFin.API")]
 [assembly: System.Reflection.AssemblyTitleAttribute("aquaFin.API")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
