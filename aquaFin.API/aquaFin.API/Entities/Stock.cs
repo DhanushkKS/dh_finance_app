@@ -2,7 +2,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace aquaFin.API.Entities;
 
-public class Stock:API.Entities.BaseEntity
+public class Stock:BaseEntity
 {
     public string Symbol { get; set; } = string.Empty;
     public string CompanyName { get; set; } = string.Empty;
@@ -12,7 +12,7 @@ public class Stock:API.Entities.BaseEntity
     public decimal LastDiv { get; set; }
     public string Industry { get; set; } = string.Empty;
     public long MarketCap { get; set; }
-   
-    public List<API.Entities.Comment> Comments { get; set; } = new List<API.Entities.Comment>();
-    public List<API.Entities.Portfolio> Portfolios { get; set; } = new List<API.Entities.Portfolio>();
+
+    public List<Comment> Comments { get; set; } = [];
+    public List<Portfolio> Portfolios { get; set; } =[];
 }
