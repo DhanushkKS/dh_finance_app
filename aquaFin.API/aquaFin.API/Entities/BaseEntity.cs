@@ -1,4 +1,4 @@
-namespace aquaFin.Domain.Entities;
+namespace aquaFin.API.Entities;
 
 public class BaseEntity
 {
