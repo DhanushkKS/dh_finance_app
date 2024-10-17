@@ -1,45 +1,53 @@
 using aquaFin.API.AppDbContext;
 using aquaFin.API.Dtos.Stock;
+using aquaFin.API.Interfaces;
 using aquaFin.API.Mappers;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace aquaFin.API.Controllers;
 [Route("stock")]
-public class StocksController:ApiControllerBase
+public class StocksController(IStockRepository stockRepository) : ApiControllerBase
 {
-    private readonly AquaFinDbContext _context;
-
-    public StocksController(AquaFinDbContext context)
-    {
-        _context = context;
-    }
-    
     [HttpGet]
-    public IActionResult GetAll()
+    public async Task<IActionResult>GetAll()
     {
-     var stocks = _context.Stocks.ToList().Select(s=>s.ToStockDto());
+     var stocks = await stockRepository.GetAll();
      return Ok(stocks);
+    
     }
 
     [HttpGet("{id}")]
-    public IActionResult GetById([FromRoute]Guid id)
+    public async Task<IActionResult> GetById([FromRoute]Guid id)
     {
-        var stock = _context.Stocks.Find(id);
-        if (stock ==null)
-        {
-            return NotFound();
-        }
-        return Ok(stock);
+       var stock = await stockRepository.GetById(id);
+       return Ok(stock);
     }
 
     [HttpPost]
-    public IActionResult Create([FromBody] CreateStockRequestDto stockDto)
+    public async  Task<IActionResult> Create([FromBody] CreateStockRequestDto stockDto)
     {
+        var newStock = await stockRepository.Create(stockDto);
+        return CreatedAtAction(nameof(GetById), new { id = newStock.Id }, newStock.ToStockDto());
         
-        var newStock = stockDto.ToStockFromCreateDto();
-        _context.Stocks.Add(newStock);
-        _context.SaveChanges();
-        return Ok(newStock);
-        
+    }
+
+    [HttpPut("{id}")]
+    public async  Task<IActionResult> Update([FromRoute] Guid id, [FromBody] UpdateStockRequestDto stockDto)
+    {
+        var  stock= await  stockRepository.Update(id, stockDto);
+        if (stock == null)
+        {
+            return NotFound();
+        }
+        return Ok(stock.ToStockDto());
+
+    }
+
+    [HttpDelete("{id}")]
+    public async  Task<IActionResult> Delete([FromRoute] Guid id)
+    {
+      await stockRepository.Delete(id);
+        return NoContent();
     }
 }

@@ -33,8 +33,17 @@ public static class  StockMappers
         };
     }
 
-    public static string AnePanchoo(this string panchoo)
+    public static Stock ToStockFromUpdateDto(this UpdateStockRequestDto stockRequestDto)
     {
-        return panchoo+"Ane panchoo";
+        return new Stock()
+        {
+            MarketCap = stockRequestDto.MarketCap,
+            LastDiv = stockRequestDto.LastDiv,
+            Industry = stockRequestDto.Industry,
+            Purchase = stockRequestDto.Purchase,
+            CompanyName = stockRequestDto.CompanyName,
+            Symbol = stockRequestDto.Symbol, 
+            
+        };
     }
 }
